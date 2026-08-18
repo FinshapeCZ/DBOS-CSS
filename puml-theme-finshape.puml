@@ -31,11 +31,20 @@
 
 'General
 skinparam shadowing false
-skinparam handwritten false
 skinparam backgroundColor transparent
 skinparam componentStyle uml2
 skinparam dpi 320
-skinparam padding 2
+
+' 'padding' is still honoured, but the single-line form (skinparam padding 2)
+' is flagged as deprecated and renders a warning banner above every diagram.
+' The block form below sets the exact same value without the banner.
+' Do not "simplify" it back to one line, and do not drop it: it adds 2px around
+' every text block, so removing it shrinks every box. There is no <style>
+' equivalent -- the style engine's 'padding' property is a different,
+' per-element setting and has no effect here.
+skinparam {
+  padding 2
+}
 
 'Default
 skinparam default{
