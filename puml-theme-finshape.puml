@@ -7,8 +7,6 @@
 
 !define PRIMARY_COLOR #f44d4d
 !define SECONDARY_COLOR #192550
-!define TERNARY_COLOR #eaeff2
-!define QUATERNARY_COLOR #3dab8c
 
 !define BACKGROUND_COLOR #eaeff2
 !define LIGHT_BACKGROUND_COLOR #f6f9fb
@@ -16,14 +14,12 @@
 !define GROUP_BACKGROUND_COLOR WhiteSmoke
 
 !define DARK_BORDER_COLOR #192550
-!define LIGHT_BORDERD_COLOR #f6f9fb
 
 !define TEXT_COLOR_DARK #192550
 !define TEXT_COLOR_LIGHT White
 
 !define FONT_SMALL 6
 !define FONT_NORMAL 10
-!define FONT_LARGE 14
 
 !define THIN 0.3
 !define NORMAL 0.5
@@ -31,11 +27,20 @@
 
 'General
 skinparam shadowing false
-skinparam handwritten false
 skinparam backgroundColor transparent
 skinparam componentStyle uml2
 skinparam dpi 320
-skinparam padding 2
+
+' 'padding' is still honoured, but the single-line form (skinparam padding 2)
+' is flagged as deprecated and renders a warning banner above every diagram.
+' The block form below sets the exact same value without the banner.
+' Do not "simplify" it back to one line, and do not drop it: it adds 2px around
+' every text block, so removing it shrinks every box. There is no <style>
+' equivalent -- the style engine's 'padding' property is a different,
+' per-element setting and has no effect here.
+skinparam {
+  padding 2
+}
 
 'Default
 skinparam default{
@@ -74,9 +79,7 @@ skinparam arrow {
 
   'Color
   Color SECONDARY_COLOR
-  LollipopColor PRIMARY_COLOR
   Thickness 1
-  MessageAlignment center
 }
 
 
@@ -99,10 +102,9 @@ skinparam participant {
   FontSize FONT_NORMAL
   FontColor TEXT_COLOR_LIGHT
   FontName FONTINT
-  'Border Color and Padding
+  'Border Color
   BackgroundColor PRIMARY_COLOR
   BorderColor DARK_BORDER_COLOR
-  Padding 20
 }
 
 'Actor
@@ -134,12 +136,10 @@ skinparam activityDiamond {
 
 'State Diagramms
 skinparam state {
-  StartColor PRIMARY_COLOR
-  EndColor SECONDARY_COLOR
   BackgroundColor PRIMARY_COLOR
   BackgroundColor<<Warning>> Red
   BorderColor DARK_BORDER_COLOR
-  FontColor TEXT_COLOR_LIGH
+  FontColor TEXT_COLOR_LIGHT
   FontName FONT
 }
 
@@ -170,11 +170,9 @@ skinparam sequence {
   'Life line
   LifeLineBackgroundColor  BACKGROUND_COLOR
   LifeLineBorderColor DARK_BORDER_COLOR
-  LifeLineBorderThickness THICK
 
   'Message
   MessageAlignment center
-  MessageTextAlignment left
 
   'Participant
   Participant plain
@@ -185,7 +183,7 @@ skinparam component {
   BorderColor PRIMARY_COLOR
   BackgroundColor PRIMARY_COLOR
   'ArrowColor SECONDARY_COLOR
-  FontColor TEXT_COLOR_LIGH
+  FontColor TEXT_COLOR_LIGHT
   FontName FONT
 }
 
@@ -272,7 +270,6 @@ skinparam database {
 'Package (default style)
 skinparam package {
   'Style
-  TitleAlignment center
   FontSize FONT_SMALL
 
   'Font Style (inherits from Default)
